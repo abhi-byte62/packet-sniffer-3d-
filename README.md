@@ -1,4 +1,4 @@
-# lanHop — 3D Network Traffic Visualization
+﻿# lanHop — 3D Network Traffic Visualization
 
 A 3D visualization of network traffic built with Three.js and Vite. This project simulates 'fake' network traffic flowing between nodes in a stylized 3D environment, complete with a packet log, hex dump decoration, and interactive camera views.
 
@@ -42,7 +42,7 @@ A 3D visualization of network traffic built with Three.js and Vite. This project
    npm run dev
    `
 
-4. Open your browser and navigate to http://localhost:5173.
+4. Open your browser and navigate to \http://localhost:5173\.
 
 ### Building for Production
 
@@ -50,7 +50,7 @@ To create a production build:
 `ash
 npm run build
 `
-The output will be in the dist directory.
+The output will be in the \dist\ directory.
 
 ## License
 
