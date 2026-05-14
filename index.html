@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>lanHop — little 3d network viz</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="webgl"></canvas>
+
+    <header class="bar">
+      <div class="bar__left">
+        <strong class="logo">lanHop</strong>
+        <span class="tagline">fake traffic, real three.js · vlan 10 in my head</span>
+      </div>
+      <div class="bar__mid">
+        <span class="uptime" id="clock-ms">0s</span>
+      </div>
+      <nav class="tabs" aria-label="Camera">
+        <button type="button" class="tabs__btn active" data-section="overview">Whole map</button>
+        <button type="button" class="tabs__btn" data-section="path">Switch</button>
+        <button type="button" class="tabs__btn" data-section="sniffer">TAP</button>
+        <button type="button" class="tabs__btn" data-section="defense">Router</button>
+      </nav>
+    </header>
+
+    <aside class="card card--left">
+      <h2 class="card__h" id="hud-title">Whole map</h2>
+      <p class="card__hint" id="panel-note">Default angle. Orbit with mouse / trackpad.</p>
+
+      <dl class="stats">
+        <div class="stats__row">
+          <dt>pkts / sec (rough)</dt>
+          <dd id="m-pps">0</dd>
+        </div>
+        <div class="stats__row">
+          <dt>bytes counted</dt>
+          <dd id="m-bytes">0</dd>
+        </div>
+        <div class="stats__row">
+          <dt>blobs on screen</dt>
+          <dd id="m-flight">0</dd>
+        </div>
+      </dl>
+
+      <label class="lbl" for="bpf">Filter log (substring)</label>
+      <input
+        id="bpf"
+        class="inp"
+        type="text"
+        spellcheck="false"
+        autocomplete="off"
+        placeholder="tcp, 443, …"
+        value=""
+      />
+
+      <div class="opts">
+        <div class="opts__run">
+          <button type="button" class="btn-run" id="btn-toggle-run" data-running="true" aria-pressed="true">
+            Stop
+          </button>
+          <span class="opts__hint">Starts on — this toggles the fake traffic + log.</span>
+        </div>
+        <label class="opts__row">
+          <input type="checkbox" id="encrypt-toggle" />
+          Pretend everything is TLS (hide fake payload text)
+        </label>
+        <label class="opts__row opts__row--range">
+          <span>How busy</span>
+          <input type="range" id="rate-slider" min="0.2" max="3" step="0.05" value="1" />
+        </label>
+      </div>
+
+      <p class="fineprint">Made for a portfolio piece — not hooked to a real NIC.</p>
+    </aside>
+
+    <aside class="card card--right">
+      <div class="card__top">
+        <span class="card__top-title">Log (newest first)</span>
+        <span class="badge" id="log-badge">running</span>
+      </div>
+      <ul class="log" id="packet-log"></ul>
+    </aside>
+
+    <footer class="foot">
+      <p class="foot__title">Hex dump (decoration only)</p>
+      <pre class="hex" id="hex-dump"></pre>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
